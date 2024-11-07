@@ -23,6 +23,10 @@ target/
 .springBeans
 .sts4-cache
 
+# Ignore all package-info.java files in the source directories
+/src/main/java/**/*.java
+!**/package-info.java
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
