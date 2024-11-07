@@ -11,7 +11,14 @@ public final class Main {
     private Main() {
     }
 
-    public static void main(String[] args) {
+    /**
+     * Main method for initializing the repositories,
+     * creating roles and users,
+     * and updating user information.
+     *
+     * @param args command line arguments
+     */
+    public static void main(final String[] args) {
         UserRepositoryImpl userRepository = new UserRepositoryImpl();
         RoleRepositoryImpl roleRepository = new RoleRepositoryImpl();
 
@@ -29,7 +36,8 @@ public final class Main {
         userRepository.create(user);
 
         userRepository.findById(user.getId()).ifPresent(value ->
-                System.out.println("User: " + value.getName() + ", Roles: " + value.getRoles())
+                System.out.println("User: " + value.getName()
+                        + ", Roles: " + value.getRoles())
         );
 
         user.setName("Amour Kit");

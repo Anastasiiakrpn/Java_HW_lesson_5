@@ -1,6 +1,13 @@
 package org.anastasiiapanchenko.lesson5.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,17 +15,37 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
+@Getter
+@Setter
 public class User {
 
+    /**
+     * The unique identifier for the user.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * The name of the user.
+     */
     private String name;
+
+    /**
+     * The email of the user.
+     */
     private String email;
+
+    /**
+     * The password of the user.
+     */
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    /**
+     * The roles assigned to the user.
+     */
+
+    @ManyToMany
     @JoinTable(
             name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -26,51 +53,19 @@ public class User {
     )
     private List<Role> roles;
 
-    public User(String name, String email) {
-        this.name = name;
-        this.email = email;
+    /**
+     * Constructor to create a user with a name and email.
+     *
+     * @param userName  the name of the user.
+     * @param userEmail the email of the user.
+     */
+    public User(final String userName, final String userEmail) {
+        this.name = userName;
+        this.email = userEmail;
     }
-
+    /**
+     * Default constructor.
+     */
     public User() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
     }
 }

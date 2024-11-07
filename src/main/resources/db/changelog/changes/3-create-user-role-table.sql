@@ -10,3 +10,4 @@ CREATE TABLE user_role (
 ) ENGINE=InnoDB;
 
 --rollback DROP TABLE user_role;
+
